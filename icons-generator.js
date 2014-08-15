@@ -73,24 +73,26 @@
 
   function createimages() {
     zip = new JSZip();
-    var icons = zip.folder("icons");
+    var icons = zip.folder('icons');
     thumbs.innerHTML += '<li>Hover over the size to see a preview</li>';
     sizes.forEach(function(now) {
       resizecanvas.width = now[0];
       resizecanvas.height = now[1];
       resizecontext.drawImage(c,0,0,now[0],now[1]);
       var img = new Image();
-      img.src = resizecanvas.toDataURL("image/png");
+      img.src = resizecanvas.toDataURL('image/png');
       icons.file(
         now[0] + 'x' + now[1]+'.png',
         img.src.substr(img.src.indexOf(',') + 1),
         { base64: true }
       );
       var item = document.createElement('li');
-      var span = document.createElement('span');
-      span.innerHTML = now[0] + 'x' + now[1];
-      item.appendChild(span);
-      span.appendChild(img);
+      var a = document.createElement('a');
+      a.href = img.src;
+      a.download = now[0] + 'x' + now[1] + '.png';
+      a.innerHTML = now[0] + 'x' + now[1];
+      item.appendChild(a);
+      a.appendChild(img);
       thumbs.appendChild(item);
     });
     downloadbutton.disabled = false;

@@ -52,10 +52,11 @@ canvas {
   width: 512px;
   height: 512px;
   background-color: #eee;
-  background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), 
-  linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc);
+  background-image: 
+    linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc), 
+    linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc);
   background-size:60px 60px;
-background-position:0 0, 30px 30px;
+  background-position:0 0, 30px 30px;
   display: block;
   position: relative;
   margin: 10px;
@@ -78,19 +79,24 @@ background-position:0 0, 30px 30px;
 }
 .thumbs img {
   margin: 5px;
-  display: none;
+  opacity: 0;
   position: absolute; 
   top: 80px;
   left: 80px;
+  transition: 0.1s;
 }
-.thumbs span:hover img {
-  display: block;
+.thumbs a:hover img {
+  opacity: 1;
 }
-.thumbs span {
+.thumbs a:hover {
+  color: lime;
+}
+.thumbs a {
   display: block;
   margin-bottom: 5px;
   color: #fff;
   padding: 2px;
+  transition: 0.2s;
 }
 .info p {
   color: #999;
