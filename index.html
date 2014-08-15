@@ -1,18 +1,53 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-	<meta charset="UTF-8">
-	<title>Generate icons from a dropped image</title>
-	<link rel="stylesheet" type="text/css" href="icons-generator.css">
+  <meta charset="UTF-8">
+  <title>Generate icons from a dropped image</title>
+  <link rel="stylesheet" type="text/css" href="icons-generator.css">
 </head>
 <body>
-	<p>Drop an image below</p>
-	<canvas></canvas>
-	<button disabled id="create">Create Thumbs</button>
-	<button disabled id="download">Download Thumbs</button>
-	<ul id="thumbs"></ul>
-	<script src="FileSaver.js"></script>
-	<script src="jszip.min.js"></script>
-	<script src="icons-generator.js"></script>
+  <header>
+    <h1>Icon Generator</h1>
+    <nav>
+      <ul class="topmenu">
+        <li><a href="#docs">What is this?</a></li>
+        <li><a href="https://github.com/codepo8/icons-generator/">Get the source</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="mainpanel">
+  <h2>Drop an image below</h2>
+  <canvas></canvas>
+  <div class="buttons">
+    <button disabled class="create">Create Thumbs</button>
+    <button disabled class="download">Download Thumbs</button>
+  </div>
+  </section>
+  <ul class="thumbs"></ul>
+  <section class="info">
+    <h2 id="docs">So what's all this then, eh?</h2>
+
+    <p>This is just a small tool that allows you to create a zip containing icons for a packaged application (for example for Firefox OS) from any picture.</p>
+
+    <p>All you do is:</p>
+    <ol>
+      <li>Drag and drop an image on the above sqare</li>
+      <li>Click the "Create Thumbs" button and check out the previews by rolling over them.</li>
+      <li>Click the "Download Thumbs" button to get your Zip file</li>
+    </ol>
+
+    <p>The <a href="https://github.com/codepo8/icons-generator/">source code is available on GitHub, updates will be announced there, too.</a></p>
+
+    <p>You can see this in <a href="https://www.youtube.com/watch?v=5hxHxo_kh2I">action on YouTube</a>:</p>
+
+    <p><iframe width="640" height="360" src="//www.youtube-nocookie.com/embed/5hxHxo_kh2I?rel=0" frameborder="0" allowfullscreen></iframe></p>
+ </section>
+ <footer>
+ <p>Written by <a href="http://christianheilmann.com">Christian Heilmann</a> using plain JavaScript (and a bit of Java in a cup), using <a href="http://stuk.github.io/jszip/">Stuart Knightley's JSZip</a>, <a href="https://github.com/eligrey/FileSaver.js/">Eli Grey's FileSaver</a> and some modified CSS gradients (the checkerboard) by <a href="http://lea.verou.me/css3patterns/#checkerboard">Lea Verou</a>.</p>
+</footer>
+  <script src="FileSaver.js"></script>
+  <script src="jszip.min.js"></script>
+  <script src="icons-generator.js"></script>
 </body>
 </html>

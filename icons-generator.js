@@ -1,19 +1,35 @@
+/*! icons-generator.js
+ *  A saveAs() FileSaver implementation.
+ *  2014-08-15
+ *
+ *  By Chris Heilmann, http://christianheilmann.com
+ *  License: BSD
+ *    See http://christianheilmann.com/license.txt
+ */
+
+/* Requirements: FileSaver.js and jszip */
+
 (function(){
 
   var c = document.querySelector('canvas');
   var cx = c.getContext('2d');
-  var thumbs = document.querySelector('#thumbs');
-  var createbutton = document.querySelector('#create');
-  var downloadbutton = document.querySelector('#download');
+  var thumbs = document.querySelector('.thumbs');
+  var createbutton = document.querySelector('.create');
+  var downloadbutton = document.querySelector('.download');
   var resizecanvas = document.createElement('canvas');
   var resizecontext = resizecanvas.getContext('2d');
-  var sizes = [[16,16],[32,32],[48,48],[64,64],[128,128],[256,256]];
-  var canvassize = [256,256];
+  var sizes = [
+    [16,16], [32,32], [48,48], [60,60], [64,64], [90,90],
+    [128,128], [256,256], [512,512]
+  ];
+  /* see: https://developer.mozilla.org/en-US/Apps/Build/Manifest */
+  var canvasrolloverclass = 'over';
+  var canvassize = [256, 256];
   var zip;
   var mousedown = false;
 
   function getdroppedimage(ev) {
-    c.classList.remove('over');
+    c.classList.remove(canvasrolloverclass);
     var files = ev.dataTransfer.files;
     if (files.length > 0) {
       if (files[0].type.indexOf('image') !== -1) {
@@ -34,10 +50,9 @@
       var h = img.naturalHeight;
       c.width = canvassize[0];
       c.height = canvassize[1];
-      /* TODO: center non-square pictures */
       cx.drawImage(img, 0, 0);
       pixels = cx.getImageData(0, 0, w, h);
-
+      /* meh be... TODO
       c.addEventListener('mousedown', function(ev) {
         mousedown = true;
       }, false);
@@ -51,6 +66,7 @@
           var y = ev.pageY - c.offsetTop - 50;
           cx.drawImage(img, x, y);
       }, false);
+      */
     createbutton.disabled = false;
     };
   }
@@ -58,6 +74,7 @@
   function createimages() {
     zip = new JSZip();
     var icons = zip.folder("icons");
+    thumbs.innerHTML += '<li>Hover over the size to see a preview</li>';
     sizes.forEach(function(now) {
       resizecanvas.width = now[0];
       resizecanvas.height = now[1];
@@ -70,10 +87,10 @@
         { base64: true }
       );
       var item = document.createElement('li');
-      item.appendChild(img);
       var span = document.createElement('span');
       span.innerHTML = now[0] + 'x' + now[1];
       item.appendChild(span);
+      span.appendChild(img);
       thumbs.appendChild(item);
     });
     downloadbutton.disabled = false;
@@ -95,7 +112,7 @@
     download();
   }, false);
   c.addEventListener('dragover', function(ev) {
-    this.classList.add('over');
+    this.classList.add(canvasrolloverclass);
     ev.preventDefault();
   }, false);
   c.addEventListener('drop', function(ev) {
