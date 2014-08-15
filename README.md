@@ -19,4 +19,6 @@ It was tested in Chrome, Firefox, Opera and Safari on OSX. I also showed it to a
 
 Right now your original image needs to be square and will just be shown at 0,0.
 
-Later versions will center images that are not and allow for moving the image and maybe cropping and fancy things. Then again, an icon should be designed square, doesn't it?
+Lies! This totally has been fixed! Images are now resized and centered.
+
+Later versions might allow for moving the image and maybe cropping and fancy things. Then again, an icon should be designed square, doesn't it?

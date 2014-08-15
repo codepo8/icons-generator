@@ -50,8 +50,8 @@
       var h = img.naturalHeight;
       c.width = canvassize[0];
       c.height = canvassize[1];
-      cx.drawImage(img, 0, 0);
-      pixels = cx.getImageData(0, 0, w, h);
+      var co = resize(w, h, canvassize[0], canvassize[1]);
+      cx.drawImage(img, co.x, co.y, co.w, co.h);
       /* meh be... TODO
       c.addEventListener('mousedown', function(ev) {
         mousedown = true;
@@ -101,6 +101,23 @@
       zip.generate({type: 'blob'}),
       'icons.zip'
     );
+  }
+
+  function resize( imagewidth, imageheight, thumbwidth, thumbheight ) {
+    var w = 0, h = 0, x = 0, y = 0,
+    widthratio = imagewidth / thumbwidth,
+    heightratio = imageheight / thumbheight,
+    maxratio = Math.max( widthratio, heightratio );
+    if ( maxratio > 1 ) {
+      w = imagewidth / maxratio;
+      h = imageheight / maxratio;
+    } else {
+      w = imagewidth;
+      h = imageheight;
+    }
+    x = ( thumbwidth - w ) / 2;
+    y = ( thumbheight - h ) / 2;
+    return { w:w, h:h, x:x, y:y };
   }
 
   /* Event handlers */
